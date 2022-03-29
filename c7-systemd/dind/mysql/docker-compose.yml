@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: mysqldb
+    image: mysql:8
+    env_file:
+      - ../default.env
+    environment:
+      LANG: C.UTF-8
+    restart: always
+    ports:
+      - "3306:3306"
+    command: --character-set-client-handshake=FALSE --character-set-server=utf8mb4 --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+volumes:
+  mysql_data:

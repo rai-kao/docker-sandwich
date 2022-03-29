@@ -1,0 +1,14 @@
+version: '3'
+services:
+  sentinel-dashboard:
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+      args:
+        - SENTINEL_DASHBOARD_VERSION=1.7.0
+        - SENTINEL_SERVER_PORT=8019
+    image: sentinel-dashboard:1.7
+    container_name: sentinel-dashboard
+    restart: always
+    ports:
+      - "8019:8019"

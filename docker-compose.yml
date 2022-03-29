@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  dind:
+    build: 
+      context: ./c7-systemd
+      dockerfile: Dockerfile
+      target: sandwich
+    image: local/c7-systemd:1.0
+    container_name: sandwich
+    privileged: true
+    sysctls:
+      - net.core.somaxconn=512
+    dns:
+      - "8.8.8.8"       # Not working on Docker Desktop for Windows, use docker setting panel > Resources > Network > Manual DNS
+    ports:
+      - "80:80"         # FastDFS
+      - "22122:22122"   # FastDFS tracker
+      - "23000:23000"   # FastDFS storage
+      - "6379:6379"     # Redis
+      - "3306:3306"     # MySQL
+      - "27017:27017"   # Mongo
+      - "49080:49080"   # Storm UI
+      - "6627:6627"     # Storm Nimbus
+      - "8848:8848"     # Nacos
+      - "8019:8019"     # Sentinel
+      - "9019:9019"     # Sentinel dashboard
+      - "2181:2181"     # ZooKeeper
+      - "9092:9092"     # Kafka
+      - "9000:9000"     # SonarQube

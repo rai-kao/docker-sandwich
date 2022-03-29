@@ -1,0 +1,16 @@
+version: '3'
+services:
+  fastdfs:
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+    image: fastdfs:latest
+    container_name: fastdfs
+    env_file:
+      - ../default.env
+    restart: always
+    ports:
+      - "80:80"
+      - "8888:8888"
+      - "22122:22122"
+      - "23000:23000"
